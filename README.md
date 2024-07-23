@@ -10,4 +10,4 @@
   - [Report](https://docs.google.com/document/d/18meNBzwrPrYxmvA9a-qNMXUQEoNgEYPXGD7hOWt23AM/edit)
 
 ## System Architecture:
-![image](assets/system_architecture.png)
+![image](assets/system_architecture.png)    
