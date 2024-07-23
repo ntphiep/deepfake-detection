@@ -30,4 +30,3 @@
 - Train, Test and save to `.pt` file.
 
 # References:
-- [Github Repo](https://github.com/abhijitjadhav1998/Deepfake_detection_using_deep_learning)
