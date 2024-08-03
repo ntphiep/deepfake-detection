@@ -1,0 +1,77 @@
+3.1 Ý tưởng dự án
+Trong thế giới của các nền tảng truyền thông xã hội ngày càng phát triển, Deepfake được coi là mối đe dọa lớn nhất của
+AI. Có nhiều Kịch bản mà những deepfake hoán đổi khuôn mặt thực tế này được sử dụng để tạo ra sự căng thẳng về mặt chính
+trị, các sự kiện khủng bố giả, khiêu dâm trả thù, tống tiền mọi người dễ dàng hình dung ra. Một số ví dụ là video
+khỏa thân của Brad Pitt, Angelina Jolie.
+Việc phát hiện ra sự khác biệt giữa video deepfake và video nguyên bản trở nên rất quan trọng. Chúng tôi đang sử dụng
+AI để chống lại AI. Deepfake được tạo bằng các công cụ như FaceApp [11] và Face Swap [12], sử dụng các mạng nơ-ron được
+đào tạo trước như GAN hoặc bộ mã hóa Tự động để tạo ra các deepfake này. Phương pháp của chúng tôi sử dụng mạng nơ-ron
+nhân tạo dựa trên LSTM để xử lý phân tích thời gian tuần tự của các khung hình video và CNN Res-Next được đào tạo trước
+để trích xuất các tính năng cấp khung hình. Mạng nơ-ron tích chập
+ResNext trích xuất các tính năng cấp khung hình và các tính năng này được sử dụng thêm để đào tạo
+Mạng nơ-ron hồi quy nhân tạo dựa trên Bộ nhớ dài hạn ngắn để phân loại video là Deepfake hay thật.
+Để mô phỏng các tình huống thời gian thực và giúp mô hình hoạt động tốt hơn trên dữ liệu thời gian thực, chúng tôi
+đã đào tạo phương pháp của mình với một lượng lớn dữ liệu cân bằng và kết hợp nhiều tập dữ liệu có sẵn
+như FaceForensic++[1], Deepfake detection challenge[2] và Celeb-DF[3].
+Ngoài ra, để khách hàng có thể sử dụng, chúng tôi đã phát triển một ứng dụng giao diện người dùng, trong đó người dùng
+sẽ tải video lên. Video sẽ được mô hình xử lý và đầu ra sẽ được trả về cho người dùng với phân loại video là
+deepfake hay thật và độ tin cậy của mô hình.
+
+3.2 Động lực của dự án
+Công nghệ camera di động ngày càng tinh vi và phạm vi tiếp cận ngày càng mở rộng của phương tiện truyền thông xã hội
+và các cổng thông tin chia sẻ phương tiện truyền thông đã giúp việc tạo và truyền bá video kỹ thuật số trở nên thuận
+tiện hơn bao giờ hết. Học sâu đã tạo ra các công nghệ mà chỉ một vài năm trước đây người ta cho là không thể. Các mô
+hình tạo sinh hiện đại là một ví dụ về những công nghệ này, có khả năng tổng hợp hình ảnh, giọng nói, âm nhạc và
+thậm chí cả video siêu thực. Những mô hình này đã được sử dụng trong nhiều ứng dụng khác nhau, bao gồm việc giúp
+thế giới dễ tiếp cận hơn thông qua chuyển văn bản thành giọng nói và giúp tạo dữ liệu đào tạo cho hình ảnh y tế.
+Giống như bất kỳ công nghệ chuyển đổi nào, điều này đã tạo ra những thách thức mới. Cái gọi là "deep fake" được tạo
+ra bởi các mô hình tạo sâu có thể thao túng các clip video và âm thanh. Kể từ lần đầu tiên xuất hiện vào cuối năm
+2017, nhiều phương pháp và công cụ tạo deep fake nguồn mở đã xuất hiện hiện nay, dẫn đến số lượng clip phương tiện
+tổng hợp ngày càng tăng. Trong khi nhiều clip có thể có mục đích gây cười, thì một số clip khác có thể gây hại cho
+cá nhân và xã hội. Cho đến gần đây, số lượng video giả và mức độ chân thực của chúng đã tăng lên do tính khả dụng
+của các công cụ chỉnh sửa, nhu cầu cao về chuyên môn trong lĩnh vực này.
+Việc lan truyền deep fake trên các nền tảng truyền thông xã hội đã trở nên rất phổ biến dẫn đến việc spam và suy
+đoán thông tin sai lệch trên nền tảng này. Hãy tưởng tượng một deep fake về thủ tướng của chúng ta tuyên chiến với
+các nước láng giềng hoặc một deep fake về người nổi tiếng có uy tín đang lạm dụng người hâm mộ. Những loại deep fake này
+sẽ rất khủng khiếp và dẫn đến đe dọa, gây hiểu lầm cho người dân thường.
+Để khắc phục tình trạng như vậy, phát hiện Deep Fake rất quan trọng. Vì vậy, chúng tôi mô tả một phương pháp học sâu
+mới có thể phân biệt hiệu quả các video giả do AI tạo ra (Deep Fake Videos) với video thật. Việc phát triển công nghệ
+có thể phát hiện video giả là vô cùng quan trọng, để có thể xác định và ngăn chặn video giả phát tán trên internet.
+
+3.3 Khảo sát tài liệu
+Face Warping Artifacts [15] đã sử dụng phương pháp tiếp cận để phát hiện các hiện vật bằng cách so sánh các vùng
+khuôn mặt được tạo ra và các vùng xung quanh chúng với một mô hình Mạng nơ-ron tích chập chuyên dụng. Trong công
+trình này có hai loại Face Artifacts. Phương pháp của họ dựa trên các quan sát rằng thuật toán deepfake hiện tại
+chỉ có thể tạo ra hình ảnh có độ phân giải hạn chế, sau đó cần phải được chuyển đổi thêm để khớp với các khuôn mặt
+cần thay thế trong video nguồn. Phương pháp của họ không xem xét đến phân tích thời gian của các khung hình.
+
+Phát hiện bằng cách chớp mắt [16] mô tả một phương pháp mới để phát hiện deepfake bằng cách chớp mắt như một tham số
+quan trọng dẫn đến việc phân loại video là deepfake hay nguyên bản. Mạng tích chập hồi quy dài hạn (LRCN) được sử dụng
+để phân tích thời gian các khung hình bị cắt xén của chớp mắt.
+Vì ngày nay các thuật toán tạo deepfake đã trở nên quá mạnh mẽ đến mức việc không chớp mắt không thể là manh mối duy
+nhất để phát hiện deepfake. Phải có một số thông số khác phải được xem xét để phát hiện deepfake như sự mê hoặc của
+răng, nếp nhăn trên khuôn mặt, vị trí lông mày không đúng, v.v.
+
+Mạng con nhộng để phát hiện hình ảnh và video giả mạo [17] sử dụng phương pháp sử dụng mạng con nhộng để phát hiện
+hình ảnh và video giả mạo, bị chỉnh sửa trong các tình huống khác nhau, như phát hiện tấn công phát lại và phát
+hiện video do máy tính tạo ra.
+Trong phương pháp của họ, họ đã sử dụng nhiễu ngẫu nhiên trong giai đoạn đào tạo, đây không phải là lựa chọn tốt.
+Mô hình vẫn hoạt động có lợi trong tập dữ liệu của họ nhưng có thể không hoạt động trên dữ liệu thời gian thực
+do nhiễu trong quá trình đào tạo. Phương pháp của chúng tôi được đề xuất để đào tạo trên các tập dữ liệu không
+nhiễu và thời gian thực.
+
+Mạng nơ-ron hồi quy [18] (RNN) để phát hiện deepfake đã sử dụng phương pháp sử dụng RNN để xử lý tuần tự các khung hình
+cùng với mô hình được đào tạo trước ImageNet. Quy trình của họ sử dụng tập dữ liệu HOHO [19] chỉ bao gồm 600 video.
+Tập dữ liệu của họ bao gồm một số lượng nhỏ video và cùng loại video, có thể không hoạt động tốt trên dữ liệu
+thời gian thực. Chúng tôi sẽ đào tạo mô hình của mình trên một số lượng lớn dữ liệu thời gian thực.
+Video chân dung tổng hợp sử dụng phương pháp Tín hiệu sinh học [20] trích xuất các tín hiệu sinh học từ các vùng
+trên khuôn mặt trên các cặp video chân dung nguyên sơ và deepfake.
+Áp dụng các phép biến đổi để tính toán sự nhất quán về mặt không gian và thời gian, nắm bắt các đặc điểm tín hiệu
+trong các bản đồ vectơ đặc trưng và quang phổ kế (PPG), và đào tạo thêm Máy vectơ hỗ trợ xác suất (SVM) và
+Mạng nơ-ron tích chập (CNN). Sau đó, giá trị trung bình của các xác suất xác thực được sử dụng để phân loại xem
+video là deepfake hay nguyên bản.
+
+Fake Catcher phát hiện nội dung giả với độ chính xác cao, không phụ thuộc vào trình tạo, nội dung, độ phân giải và
+chất lượng của video. Do thiếu bộ phân biệt dẫn đến mất mát trong các phát hiện của họ để bảo toàn các tín hiệu sinh
+học, việc xây dựng một hàm mất mát có thể phân biệt được theo các bước xử lý tín hiệu được đề xuất không phải là
+một quá trình đơn giản.
